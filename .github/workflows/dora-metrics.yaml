@@ -9,6 +9,10 @@ on:
 jobs:
   get-workflow-data:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      repository-projects: write
     outputs: 
       started_time: ${{ steps.get-time.outputs.STARTED_TIME }}
       finished_time: ${{ steps.get-time.outputs.FINISHED_TIME }}
