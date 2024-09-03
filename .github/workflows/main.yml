@@ -19,7 +19,7 @@ jobs:
       - name: Build and export
         uses: docker/build-push-action@v6
         with:
-          tags: api_clinica:$SHORT_SHA
+          tags: api_clinica:${SHORT_SHA}
           outputs: type=docker,dest=/tmp/api_clinica.tar
       
       - name: Upload artifact
@@ -52,5 +52,5 @@ jobs:
         run: |
           docker load --input /tmp/api_clinica.tar
           echo "${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
-          docker tag api_clinica:$SHORT_SHA ${{ secrets.DOCKER_HUB_USERNAME }}/api_clinica:$SHORT_SHA
-          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/api_clinica:$SHORT_SHA
+          docker tag api_clinica:${SHORT_SHA} ${{ secrets.DOCKER_HUB_USERNAME }}/api_clinica:${SHORT_SHA}
+          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/api_clinica:${SHORT_SHA}
