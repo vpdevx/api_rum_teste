@@ -53,7 +53,6 @@ jobs:
           echo "Commit SHA: $GITHUB_SHA"
           echo "Repository: $GITHUB_REPOSITORY"
           echo "Server URL: $GITHUB_SERVER_URL"
-
           curl -X POST "https://api.us5.datadoghq.com/api/v2/dora/deployment" \
             -H "Accept: application/json" \
             -H "Content-Type: application/json" \
