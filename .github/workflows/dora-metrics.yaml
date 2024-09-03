@@ -13,6 +13,7 @@ jobs:
       contents: write
       pull-requests: write
       repository-projects: write
+      actions: read
     outputs: 
       started_time: ${{ steps.get-time.outputs.STARTED_TIME }}
       finished_time: ${{ steps.get-time.outputs.FINISHED_TIME }}
