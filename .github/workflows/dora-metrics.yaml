@@ -60,6 +60,7 @@ jobs:
             -d '{
               "data": {
                 "attributes": {
+                 "env": "prod",
                   "started_at": '"$STARTED_TIME"',
                   "finished_at": '"$FINISHED_TIME"',
                   "git": {
