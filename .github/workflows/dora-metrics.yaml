@@ -1,0 +1,70 @@
+name: Alternative Workflow
+
+on:
+  workflow_run:
+    workflows: ["Deploy app"]
+    types:
+      - completed
+
+jobs:
+  get-workflow-data:
+    runs-on: ubuntu-latest
+    outputs: 
+      started_time: ${{ steps.get-time.outputs.STARTED_TIME }}
+      finished_time: ${{ steps.get-time.outputs.FINISHED_TIME }}
+    
+    steps:
+      - name: Get workflow run data
+        id: get-time
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const { data: workflowRuns } = await github.rest.actions.listWorkflowRuns({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: "Deploy app",
+              status: "completed",
+              per_page: 1,
+            });
+            
+            const workflowRun = workflowRuns.workflow_runs[0];
+            const startedTime = workflowRun.run_started_at;
+            const finishedTime = workflowRun.updated_at;
+
+            core.setOutput("STARTED_TIME", new Date(startedTime).toISOString());
+            core.setOutput("FINISHED_TIME", new Date(finishedTime).toISOString());
+
+  send-info:
+    runs-on: ubuntu-latest
+    needs: get-workflow-data
+    steps:
+      - name: Send info to Datadog
+        env:
+          STARTED_TIME: ${{ needs.get-workflow-data.outputs.started_time }}
+          FINISHED_TIME: ${{ needs.get-workflow-data.outputs.finished_time }}
+          DATADOG_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+        run: |
+          echo "Started Time: $STARTED_TIME"
+          echo "Finished Time: $FINISHED_TIME"
+          echo "Commit SHA: $GITHUB_SHA"
+          echo "Repository: $GITHUB_REPOSITORY"
+          echo "Server URL: $GITHUB_SERVER_URL"
+
+          curl -X POST "https://api.us5.datadoghq.com/api/v2/dora/deployment" \
+            -H "Accept: application/json" \
+            -H "Content-Type: application/json" \
+            -H "DD-API-KEY: $DATADOG_API_KEY" \
+            -d '{
+              "data": {
+                "attributes": {
+                  "started_at": "'"$STARTED_TIME"'",
+                  "finished_at": "'"$FINISHED_TIME"'",
+                  "git": {
+                    "commit_sha": "'"$GITHUB_SHA"'",
+                    "repository_url": "'"$GITHUB_SERVER_URL/$GITHUB_REPOSITORY"'"
+                  },
+                  "service": "'"$GITHUB_REPOSITORY"'",
+                  "version": "1"
+                }
+              }
+            }'
