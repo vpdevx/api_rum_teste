@@ -33,11 +33,10 @@ jobs:
             });
             
             const workflowRun = workflowRuns.workflow_runs[0];
-            const startedTime = workflowRun.run_started_at;
-            const finishedTime = workflowRun.updated_at;
-
-            core.setOutput("STARTED_TIME", new Date(startedTime).toISOString());
-            core.setOutput("FINISHED_TIME", new Date(finishedTime).toISOString());
+            const startedTime = new Date(workflowRun.run_started_at).getTime() / 1000; 
+            const finishedTime = new Date(workflowRun.updated_at).getTime() / 1000; 
+            core.setOutput("STARTED_TIME", startedTime);
+            core.setOutput("FINISHED_TIME", finishedTime);
 
   send-info:
     runs-on: ubuntu-latest
