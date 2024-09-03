@@ -1,4 +1,4 @@
-name: Alternative Workflow
+name: Send info DORA metrics 
 
 on:
   workflow_run:
