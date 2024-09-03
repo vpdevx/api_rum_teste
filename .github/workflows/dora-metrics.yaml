@@ -61,8 +61,8 @@ jobs:
             -d '{
               "data": {
                 "attributes": {
-                  "started_at": "'"$STARTED_TIME"'",
-                  "finished_at": "'"$FINISHED_TIME"'",
+                  "started_at": '"$STARTED_TIME"',
+                  "finished_at": '"$FINISHED_TIME"',
                   "git": {
                     "commit_sha": "'"$GITHUB_SHA"'",
                     "repository_url": "'"$GITHUB_SERVER_URL/$GITHUB_REPOSITORY"'"
