@@ -5,12 +5,13 @@ import com.br.clinica_api.service.ConsultaService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController @RequestMapping("/consulta")
-@AllArgsConstructor  // @CrossOrigin(origins = "*")
+@AllArgsConstructor @CrossOrigin(origins = "*")
 public class ConsultaController {
 
     private ConsultaService consultaService;

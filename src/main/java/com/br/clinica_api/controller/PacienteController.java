@@ -8,13 +8,14 @@ import com.br.clinica_api.service.ExameService;
 import com.br.clinica_api.service.PacienteService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController @RequestMapping("/paciente")
-@AllArgsConstructor  // @CrossOrigin(origins = "*")
+@AllArgsConstructor @CrossOrigin(origins = "*")
 public class PacienteController {
     private PacienteService pacienteService;
     private ConsultaService consultaService;

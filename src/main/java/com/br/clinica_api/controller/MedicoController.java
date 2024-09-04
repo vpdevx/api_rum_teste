@@ -8,12 +8,13 @@ import com.br.clinica_api.service.MedicoService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController @RequestMapping("/medico")
-@AllArgsConstructor  // @CrossOrigin(origins = "*")
+@AllArgsConstructor @CrossOrigin(origins = "*")
 public class MedicoController {
 
     private MedicoService medicoService;
