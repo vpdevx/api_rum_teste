@@ -38,8 +38,9 @@ jobs:
             core.setOutput("STARTED_TIME", startedTime);
             core.setOutput("FINISHED_TIME", finishedTime);
 
-  send-info:
+  on-success:
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     needs: get-workflow-data
     steps:
       - name: Send info to Datadog
