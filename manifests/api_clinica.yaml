@@ -54,3 +54,45 @@ spec:
           value: "true"
         - name: DD_APPSEC_SCA_ENABLED
           value: "true"
+
+--- 
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: api-clinica-service
+  labels:
+    app: api-clinica
+spec:
+  selector:
+    app: api-clinica
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+
+--- 
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: api-clinica-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    cert-manager.io/cluster-issuer: "cloudflare-cluster-issuer"
+spec:
+  rules:
+    - host: api-clinica.k8s.lab4ever.xyz  # Substitua pelo seu domínio
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: api-clinica-service
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - api-clinica.k8s.lab4ever.xyz
+      secretName: api-clinica-tls
