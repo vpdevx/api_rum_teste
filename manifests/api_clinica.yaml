@@ -5,7 +5,7 @@ metadata:
   labels:
     app: api-clinica
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: api-clinica
@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: api-clinica
-        image: ${{ secrets.DOCKER_HUB_USERNAME }}/api_clinica:${{ env.SHORT_SHA }}
+        image: vinicpires/api_clinica:SHORT_SHA
         ports:
         - containerPort: 8080
         env:
