@@ -4,6 +4,9 @@ metadata:
   name: api-clinica
   labels:
     app: api-clinica
+    tags.datadoghq.com/env: prod
+    tags.datadoghq.com/service: api_clinica
+    tags.datadoghq.com/version: "1.0"
 spec:
   replicas: 1
   selector:
@@ -13,6 +16,12 @@ spec:
     metadata:
       labels:
         app: api-clinica
+        tags.datadoghq.com/env: prod
+        tags.datadoghq.com/service: api_clinica
+        tags.datadoghq.com/version: "1.0"
+        admission.datadoghq.com/enabled: "true"
+      annotations:
+        admission.datadoghq.com/java-lib.version: v1.39.0
     spec:
       containers:
       - name: api-clinica
@@ -35,3 +44,13 @@ spec:
             secretKeyRef:
               name: spring-datasource-secret
               key: url
+        - name: DD_PROFILING_ENABLED
+          value: "true"
+        - name: DD_LOGS_INJECTION
+          value: "true"
+        - name: DD_APPSEC_ENABLED
+          value: "true"
+        - name: DD_IAST_ENABLED
+          value: "true"
+        - name: DD_APPSEC_SCA_ENABLED
+          value: "true"
