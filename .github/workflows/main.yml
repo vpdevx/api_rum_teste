@@ -54,9 +54,6 @@ jobs:
         id: vars
         run: echo "SHORT_SHA=$(echo ${GITHUB_SHA} | cut -c1-8)" >> $GITHUB_ENV
 
-      - name: Log SHORT_SHA
-        run: echo "SHORT_SHA is $SHORT_SHA"
-
       - name: Deploy to Docker Hub
         env:
           DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
