@@ -10,9 +10,6 @@ jobs:
   get-workflow-data:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
-      pull-requests: write
-      repository-projects: write
       actions: read
     outputs: 
       started_time: ${{ steps.get-time.outputs.STARTED_TIME }}
@@ -49,11 +46,6 @@ jobs:
           FINISHED_TIME: ${{ needs.get-workflow-data.outputs.finished_time }}
           DATADOG_API_KEY: ${{ secrets.DATADOG_API_KEY }}
         run: |
-          echo "Started Time: $STARTED_TIME"
-          echo "Finished Time: $FINISHED_TIME"
-          echo "Commit SHA: $GITHUB_SHA"
-          echo "Repository: $GITHUB_REPOSITORY"
-          echo "Server URL: $GITHUB_SERVER_URL"
           curl -X POST "https://api.us5.datadoghq.com/api/v2/dora/deployment" \
             -H "Accept: application/json" \
             -H "Content-Type: application/json" \
