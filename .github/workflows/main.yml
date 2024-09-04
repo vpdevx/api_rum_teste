@@ -83,8 +83,17 @@ jobs:
 
       - name: Change yaml image attribute value.
         run: |
-          sed -i 's|${{ secrets.DOCKER_HUB_USERNAME }}|'"${{ secrets.DOCKER_HUB_USERNAME }}"'|g' manifests/api_clinica.yaml
-          sed -i 's|${{ env.SHORT_SHA }}|'"${{ env.SHORT_SHA }}"'|g' manifests/api_clinica.yaml
+          # Definir variáveis de ambiente temporárias para uso com sed
+          DOCKER_HUB_USERNAME="${{ secrets.DOCKER_HUB_USERNAME }}"
+          SHORT_SHA="${{ env.SHORT_SHA }}"
+
+          # Exibir variáveis para depuração
+          echo "Docker Hub Username: $DOCKER_HUB_USERNAME"
+          echo "Short SHA: $SHORT_SHA"
+
+          # Substituir valores no arquivo YAML
+          sed -i "s|${DOCKER_HUB_USERNAME}|${DOCKER_HUB_USERNAME}|g" manifests/api_clinica.yaml
+          sed -i "s|${SHORT_SHA}|${SHORT_SHA}|g" manifests/api_clinica.yaml
 
       - name: Deploy to Kubernetes
         env:
