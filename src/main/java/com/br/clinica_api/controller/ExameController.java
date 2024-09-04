@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController @RequestMapping("/exame")
-@AllArgsConstructor  @CrossOrigin(origins = "*")
+@AllArgsConstructor  
+@CrossOrigin(origins = "*")
 public class ExameController {
     private ExameService exameService;
 

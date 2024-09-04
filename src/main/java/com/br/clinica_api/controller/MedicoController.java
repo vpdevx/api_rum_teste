@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController @RequestMapping("/medico")
-@AllArgsConstructor  @CrossOrigin(origins = "*")
+@AllArgsConstructor  
+@CrossOrigin(origins = "*")
 public class MedicoController {
 
     private MedicoService medicoService;
