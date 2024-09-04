@@ -66,3 +66,29 @@ jobs:
           echo "${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
           docker tag api_clinica:${{ env.SHORT_SHA }} ${{ secrets.DOCKER_HUB_USERNAME }}/api_clinica:${{ env.SHORT_SHA }}
           docker push ${{ secrets.DOCKER_HUB_USERNAME }}/api_clinica:${{ env.SHORT_SHA }}
+
+  deploy:
+
+    runs-on: ubuntu-latest
+    needs: ["build", "push"]
+
+    steps: 
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Get commit short sha
+        id: vars
+        run: echo "SHORT_SHA=$(echo ${GITHUB_SHA} | cut -c1-8)" >> $GITHUB_ENV
+
+      - name: Change yaml image attribute value.
+        run: |
+          sed -i 's|${{ secrets.DOCKER_HUB_USERNAME }}|'"${{ secrets.DOCKER_HUB_USERNAME }}"'|g' manifests/api_clinica.yaml
+          sed -i 's|${{ env.SHORT_SHA }}|'"${{ env.SHORT_SHA }}"'|g' manifests/api_clinica.yaml
+
+      - name: Deploy to Kubernetes
+        env:
+          KUBECONFIG_DATA: ${{ secrets.KUBECONFIG_DATA }}
+        run: |
+          echo "$KUBECONFIG_DATA" | base64 --decode > $HOME/.kube/config
+          kubectl apply -f manifests/api_clinica.yaml
