@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController @RequestMapping("/paciente")
-@AllArgsConstructor @CrossOrigin
+@AllArgsConstructor  @CrossOrigin(origins = "*")
 public class PacienteController {
     private PacienteService pacienteService;
     private ConsultaService consultaService;
