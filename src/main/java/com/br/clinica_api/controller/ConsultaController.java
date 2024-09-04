@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController @RequestMapping("/consulta")
-@AllArgsConstructor  
-@CrossOrigin(origins = "*")
+@AllArgsConstructor  // @CrossOrigin(origins = "*")
 public class ConsultaController {
 
     private ConsultaService consultaService;
