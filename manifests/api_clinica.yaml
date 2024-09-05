@@ -80,9 +80,8 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
     cert-manager.io/cluster-issuer: "cloudflare-cluster-issuer"
-annotations:
-  nginx.ingress.kubernetes.io/enable-cors: "true"
-  nginx.ingress.kubernetes.io/cors-allow-origin: "https://clinica-frontend.k8s.lab4ever.xyzs"
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "https://clinica-frontend.k8s.lab4ever.xyzs"
 spec:
   rules:
     - host: api-clinica.k8s.lab4ever.xyz  # Substitua pelo seu domínio
