@@ -18,7 +18,7 @@ public class ClinicaApiApplication {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedMethods("GET", "POST", "PUT", "DELETE")
+                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedOrigins("https://clinica-frontend.k8s.lab4ever.xyz")
                         .allowedHeaders("*")
                         .allowCredentials(false);
