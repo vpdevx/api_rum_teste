@@ -82,6 +82,7 @@ metadata:
     cert-manager.io/cluster-issuer: "cloudflare-cluster-issuer"
     nginx.ingress.kubernetes.io/enable-cors: "true"
     nginx.ingress.kubernetes.io/cors-allow-origin: "https://clinica-frontend.k8s.lab4ever.xyz"
+    nginx.ingress.kubernetes.io/cors-allow-headers: "Content-Type, Authorization, x-datadog-trace-id, x-datadog-parent-id, x-datadog-origin, x-datadog-sampling-priority"
 spec:
   rules:
     - host: api-clinica.k8s.lab4ever.xyz  # Substitua pelo seu domínio
