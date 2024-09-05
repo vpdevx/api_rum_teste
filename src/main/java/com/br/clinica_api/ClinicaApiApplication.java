@@ -17,8 +17,13 @@ public class ClinicaApiApplication {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**").allowedMethods("*").allowedOrigins("https://clinica-frontend.k8s.lab4ever.xyz");
+                registry.addMapping("/**")
+                        .allowedMethods("GET", "POST", "PUT", "DELETE")
+                        .allowedOrigins("https://clinica-frontend.k8s.lab4ever.xyz")
+                        .allowedHeaders("*")
+                        .allowCredentials(false);
             }
         };
     }
+
 }
