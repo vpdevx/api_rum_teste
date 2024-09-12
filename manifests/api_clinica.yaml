@@ -18,7 +18,7 @@ spec:
         app: api-clinica
         tags.datadoghq.com/env: prod
         tags.datadoghq.com/service: api_clinica
-        tags.datadoghq.com/version: "1.1"
+        tags.datadoghq.com/version: "1.2"
         admission.datadoghq.com/enabled: "true"
       annotations:
         admission.datadoghq.com/java-lib.version: v1.39.0
