@@ -61,7 +61,8 @@ jobs:
                     "repository_url": "'"$GITHUB_SERVER_URL/$GITHUB_REPOSITORY"'"
                   },
                   "service": "'"${{ github.event.repository.name }}"'",
-                  "version": "1"
+                  "version": "1",
+                  "landing_zone": "test"
                 }
               }
             }'
