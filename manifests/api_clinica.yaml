@@ -81,7 +81,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
     cert-manager.io/cluster-issuer: "cloudflare-cluster-issuer"
     nginx.ingress.kubernetes.io/enable-cors: "true"
-    nginx.ingress.kubernetes.io/cors-allow-origin: "https://clinica-frontend.k8s.lab4ever.xyz"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "https://cl-frontend.k8s.lab4ever.xyz"
     nginx.ingress.kubernetes.io/cors-allow-headers: "x-datadog-trace-id, x-datadog-parent-id, x-datadog-origin, x-datadog-sampling-priority, traceparent"
 spec:
   rules:
