@@ -16,7 +16,7 @@ spec:
     metadata:
       labels:
         app: api-cl
-        tags.datadoghq.com/env: prod
+        tags.datadoghq.com/env: dev
         tags.datadoghq.com/service: api-cl
         tags.datadoghq.com/version: "1.2"
         admission.datadoghq.com/enabled: "true"
