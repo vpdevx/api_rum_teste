@@ -1,31 +1,31 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: api_rum_teste
+  name: api-rum-teste
   labels:
-    app: api_rum_teste
+    app: api-rum-teste
     tags.datadoghq.com/env: dev
-    tags.datadoghq.com/service: api_rum_teste
+    tags.datadoghq.com/service: api-rum-teste
     tags.datadoghq.com/version: "1.2"
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: api_rum_teste
+      app: api-rum-teste
   template:
     metadata:
       labels:
-        app: api_rum_teste
+        app: api-rum-teste
         tags.datadoghq.com/env: dev
-        tags.datadoghq.com/service: api_rum_teste
+        tags.datadoghq.com/service: api-rum-teste
         tags.datadoghq.com/version: "1.2"
         admission.datadoghq.com/enabled: "true"
       annotations:
         admission.datadoghq.com/java-lib.version: v1.39.0
     spec:
       containers:
-      - name: api_rum_teste
-        image: vinicpires/api_rum_teste:SHORT_SHA
+      - name: api-rum-teste
+        image: vinicpires/api-rum-teste:SHORT_SHA
         ports:
         - containerPort: 8080
         env:
@@ -60,12 +60,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: api_rum_teste-service
+  name: api-rum-teste-service
   labels:
-    app: api_rum_teste
+    app: api-rum-teste
 spec:
   selector:
-    app: api_rum_teste
+    app: api-rum-teste
   ports:
     - protocol: TCP
       port: 80
@@ -76,7 +76,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: api_rum_teste-ingress
+  name: api-rum-teste-ingress
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
     cert-manager.io/cluster-issuer: "cloudflare-cluster-issuer"
@@ -85,17 +85,17 @@ metadata:
     nginx.ingress.kubernetes.io/cors-allow-headers: "x-datadog-trace-id, x-datadog-parent-id, x-datadog-origin, x-datadog-sampling-priority, traceparent"
 spec:
   rules:
-    - host: api_rum_teste.k8s.lab4ever.xyz  # Substitua pelo seu domínio
+    - host: api-rum-teste.k8s.lab4ever.xyz  # Substitua pelo seu domínio
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: api_rum_teste-service
+                name: api-rum-teste-service
                 port:
                   number: 80
   tls:
     - hosts:
-        - api_rum_teste.k8s.lab4ever.xyz
-      secretName: api_rum_teste-tls
+        - api-rum-teste.k8s.lab4ever.xyz
+      secretName: api-rum-teste-tls

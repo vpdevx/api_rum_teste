@@ -31,7 +31,7 @@ jobs:
           push: true
           context: .
           file: Dockerfile
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/api_rum_teste:${{ env.SHORT_SHA }}
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/api-rum-teste:${{ env.SHORT_SHA }}
 
       - name: Change yaml image attribute value.
         run: |
@@ -39,7 +39,7 @@ jobs:
 
           echo "Short SHA: $SHORT_SHA"
 
-          sed -i "s|api_rum_teste:.*|api_rum_teste:${SHORT_SHA}|g" manifests/api_rum_teste.yaml
+          sed -i "s|api-rum-teste:.*|api-rum-teste:${SHORT_SHA}|g" manifests/api-rum-teste.yaml
 
       - name: Deploy to Kubernetes
         env:
@@ -47,4 +47,4 @@ jobs:
         run: |
           mkdir $HOME/.kube   
           echo "$KUBECONFIG_DATA" | base64 --decode > $HOME/.kube/config
-          kubectl apply -f manifests/api_rum_teste.yaml
+          kubectl apply -f manifests/api-rum-teste.yaml
