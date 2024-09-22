@@ -1,5 +1,4 @@
-package com.br.clinica_api.model;
-
+package com.br.api_rum_teste.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -7,28 +6,25 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.util.Date;
-
 @Entity @NoArgsConstructor
-@Getter @Setter @ToString @Table(name = "medico")
-public class Medico {
+@Getter @Setter @ToString @Table(name = "product")
+public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    private String nome;
-
-    private String telefone;
-    private String email;
+    private String name;
 
     @Column(nullable = false)
-    private String crm;
-
-    private String especialidade;
+    private Double price;
+    @Column(nullable = false)
+    private String description;
+    @Column(nullable = false)
+    private String image;
 
     @Column(nullable = false)
-    private Date data_cadastro;
+    private Integer quantity;
 
 }

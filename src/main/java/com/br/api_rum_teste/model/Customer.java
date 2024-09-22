@@ -1,4 +1,4 @@
-package com.br.clinica_api.model;
+package com.br.api_rum_teste.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -9,26 +9,20 @@ import lombok.ToString;
 import java.util.Date;
 
 @Entity @NoArgsConstructor
-@Getter @Setter @ToString @Table(name = "paciente")
-public class Paciente {
+@Getter @Setter @ToString @Table(name = "customer")
+public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    private String nome;
+    private String name;
 
     @Column(nullable = false)
     private String cpf;
-
-    private String telefone;
-    private String email;
-    private String endereco;
-    private String cidade;
-    private String estado;
-    private Date data_nascimento;
-
     @Column(nullable = false)
-    private Date data_cadastro;
+    private String phone;
+    @Column(nullable = false)
+    private String email;
 
 }

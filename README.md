@@ -8,24 +8,24 @@ API desenvolvida simulando o ambiente de uma clínica médica
 <details>
   <summary>Paciente</summary>
   <br>
-  A classe Paciente representa a entidade "paciente" no sistema.
+  A classe Paciente representa a entidade "customer" no sistema.
 
 ## Estrutura da Entidade
 
-A tabela "paciente" possui os seguintes campos:
+A tabela "customer" possui os seguintes campos:
 
 | Campo           | Tipo de Dado | Descrição                      |
 |-----------------|--------------|--------------------------------|
-| id              | Long         | Identificador único do paciente|
-| nome            | String       | Nome do paciente               |
-| cpf             | String       | CPF do paciente                |
-| telefone        | String       | Telefone do paciente           |
-| email           | String       | Endereço de e-mail do paciente |
-| endereco        | String       | Endereço do paciente           |
-| cidade          | String       | Cidade do paciente             |
-| estado          | String       | Estado do paciente             |
-| data_nascimento | Date         | Data de nascimento do paciente |
-| data_cadastro   | Date         | Data de cadastro do paciente   |
+| id              | Long         | Identificador único do customer|
+| nome            | String       | Nome do customer               |
+| cpf             | String       | CPF do customer                |
+| telefone        | String       | Telefone do customer           |
+| email           | String       | Endereço de e-mail do customer |
+| endereco        | String       | Endereço do customer           |
+| cidade          | String       | Cidade do customer             |
+| estado          | String       | Estado do customer             |
+| data_nascimento | Date         | Data de nascimento do customer |
+| data_cadastro   | Date         | Data de cadastro do customer   |
 
 ## Anotações
 
@@ -33,7 +33,7 @@ A tabela "paciente" possui os seguintes campos:
 - A anotação `@NoArgsConstructor` gera um construtor padrão sem argumentos.
 - Os atributos estão anotados com `@Getter` e `@Setter` para gerar os métodos getters e setters automaticamente.
 - A anotação `@ToString` gera automaticamente o método `toString()` para representação em formato de string da classe.
-- A anotação `@Table(name = "paciente")` define o nome da tabela no banco de dados como "paciente".
+- A anotação `@Table(name = "customer")` define o nome da tabela no banco de dados como "customer".
 - O campo "id" está anotado com `@Id` e `@GeneratedValue` para gerar automaticamente o valor do identificador.
 - Os campos "nome" e "cpf" estão anotados com `@Column(nullable = false)` para indicar que são campos obrigatórios e não podem ser nulos.
 - O campo "data_cadastro" está anotado com `@Column(nullable = false)` para indicar que é um campo obrigatório e não pode ser nulo.
@@ -85,7 +85,7 @@ A tabela "consulta" possui os seguintes campos:
 | id              | Long                | Identificador único da consulta       |
 | data_consulta   | LocalDateTime      | Data e hora da consulta               |
 | observacoes     | String              | Observações da consulta               |
-| paciente        | Paciente            | Referência ao paciente associado      |
+| customer        | Paciente            | Referência ao customer associado      |
 | medico          | Medico              | Referência ao médico responsável      |
 
 ## Anotações
@@ -116,7 +116,7 @@ A tabela "exame" possui os seguintes campos:
 | data_exame   | LocalDateTime      | Data e hora do exame                 |
 | tipo_exame   | String              | Tipo de exame realizado              |
 | resultado    | String              | Resultado do exame                   |
-| paciente     | Paciente            | Referência ao paciente associado     |
+| customer     | Paciente            | Referência ao customer associado     |
 | medico       | Medico              | Referência ao médico responsável     |
 
 ## Anotações
@@ -138,44 +138,44 @@ A tabela "exame" possui os seguintes campos:
   <summary>Paciente</summary>
   <br>
   
-O `PacienteController` é responsável por lidar com as requisições relacionadas aos pacientes.
+O `PacienteController` é responsável por lidar com as requisições relacionadas aos customers.
 
 ## Métodos
 
-- `getAll()`: Retorna todos os pacientes cadastrados.
+- `getAll()`: Retorna todos os customers cadastrados.
   - Método HTTP: GET
-  - Path: `/paciente/all`
+  - Path: `/customer/all`
   - Parâmetros: Nenhum.
 
-- `getById(id)`: Retorna um paciente pelo ID.
+- `getById(id)`: Retorna um customer pelo ID.
   - Método HTTP: GET
-  - Path: `/paciente/{id}`
-  - Parâmetros: `id` (caminho da requisição) - ID do paciente a ser retornado.
+  - Path: `/customer/{id}`
+  - Parâmetros: `id` (caminho da requisição) - ID do customer a ser retornado.
 
-- `add(paciente)`: Adiciona um novo paciente.
+- `add(customer)`: Adiciona um novo customer.
   - Método HTTP: POST
-  - Path: `/paciente/add`
-  - Parâmetros: `paciente` (corpo da requisição) - Objeto Paciente a ser adicionado.
+  - Path: `/customer/add`
+  - Parâmetros: `customer` (corpo da requisição) - Objeto Paciente a ser adicionado.
 
-- `update(paciente)`: Atualiza um paciente existente.
+- `update(customer)`: Atualiza um customer existente.
   - Método HTTP: PUT
-  - Path: `/paciente/edit`
-  - Parâmetros: `paciente` (corpo da requisição) - Objeto Paciente atualizado.
+  - Path: `/customer/edit`
+  - Parâmetros: `customer` (corpo da requisição) - Objeto Paciente atualizado.
 
-- `delete(id)`: Deleta um paciente pelo ID.
+- `delete(id)`: Deleta um customer pelo ID.
   - Método HTTP: DELETE
-  - Path: `/paciente/delete/{id}`
-  - Parâmetros: `id` (caminho da requisição) - ID do paciente a ser deletado.
+  - Path: `/customer/delete/{id}`
+  - Parâmetros: `id` (caminho da requisição) - ID do customer a ser deletado.
 
-- `getConsultas(id)`: Retorna todas as consultas associadas a um paciente pelo ID.
+- `getConsultas(id)`: Retorna todas as consultas associadas a um customer pelo ID.
   - Método HTTP: GET
-  - Path: `/paciente/{id}/consultas`
-  - Parâmetros: `id` (caminho da requisição) - ID do paciente.
+  - Path: `/customer/{id}/consultas`
+  - Parâmetros: `id` (caminho da requisição) - ID do customer.
 
-- `getExames(id)`: Retorna todos os exames associados a um paciente pelo ID.
+- `getExames(id)`: Retorna todos os exames associados a um customer pelo ID.
   - Método HTTP: GET
-  - Path: `/paciente/{id}/exames`
-  - Parâmetros: `id` (caminho da requisição) - ID do paciente.
+  - Path: `/customer/{id}/exames`
+  - Parâmetros: `id` (caminho da requisição) - ID do customer.
 </details>
 
 <details>

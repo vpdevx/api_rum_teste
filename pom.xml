@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.br</groupId>
-    <artifactId>clinica_api</artifactId>
+    <artifactId>api_rum_teste</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>clinica_api</name>
-    <description>clinica_api</description>
+    <name>api_rum_teste</name>
+    <description>api_rum_teste</description>
     <properties>
         <java.version>17</java.version>
     </properties>

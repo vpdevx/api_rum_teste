@@ -1,10 +1,10 @@
-package com.br.clinica_api;
+package com.br.api_rum_teste;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ClinicaApiApplicationTests {
+class ApiRumTesteApplicationTests {
 
     @Test
     void contextLoads() {

@@ -1,4 +1,4 @@
-package com.br.clinica_api;
+package com.br.api_rum_teste;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,10 +8,10 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
-public class ClinicaApiApplication {
+public class ApiRumTesteApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ClinicaApiApplication.class, args);
+        SpringApplication.run(ApiRumTesteApplication.class, args);
     }
     @Bean
     public WebMvcConfigurer corsConfigurer() {
@@ -20,7 +20,7 @@ public class ClinicaApiApplication {
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-                        .allowedOrigins("https://clinica-frontend.k8s.lab4ever.xyz")
+                        .allowedOrigins("*")
                         .allowedHeaders("*")
                         .allowCredentials(false);
             }
