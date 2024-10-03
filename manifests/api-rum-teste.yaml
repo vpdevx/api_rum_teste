@@ -19,9 +19,9 @@ spec:
         tags.datadoghq.com/env: dev
         tags.datadoghq.com/service: api-rum-teste
         tags.datadoghq.com/version: "1.2"
-        admission.datadoghq.com/enabled: "true"
-      annotations:
-        admission.datadoghq.com/java-lib.version: v1.39.0
+     #   admission.datadoghq.com/enabled: "true"
+     # annotations:
+     #   admission.datadoghq.com/java-lib.version: v1.39.0
     spec:
       containers:
       - name: api-rum-teste
@@ -44,6 +44,18 @@ spec:
             secretKeyRef:
               name: spring-datasource-secret
               key: url
+        - name: DD_ENV
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.labels['tags.datadoghq.com/env']
+        - name: DD_SERVICE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.labels['tags.datadoghq.com/service']
+        - name: DD_VERSION
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.labels['tags.datadoghq.com/version']
         - name: DD_PROFILING_ENABLED
           value: "false"
         - name: DD_LOGS_INJECTION
