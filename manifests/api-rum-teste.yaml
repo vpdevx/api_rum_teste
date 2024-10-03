@@ -45,7 +45,7 @@ spec:
               name: spring-datasource-secret
               key: url
         - name: DD_PROFILING_ENABLED
-          value: "true"
+          value: "false"
         - name: DD_LOGS_INJECTION
           value: "true"
         - name: DD_APPSEC_ENABLED
