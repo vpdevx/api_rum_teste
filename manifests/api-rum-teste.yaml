@@ -28,6 +28,9 @@ spec:
         image: vinicpires/api-rum-teste:SHORT_SHA
         ports:
         - containerPort: 8080
+        volumeMounts:
+          - name: apmsocketpath
+            mountPath: /var/run/datadog
         env:
         - name: SPRING_DATASOURCE_PASSWORD
           valueFrom:
