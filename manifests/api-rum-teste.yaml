@@ -101,7 +101,7 @@ metadata:
     cert-manager.io/cluster-issuer: "cloudflare-cluster-issuer"
     nginx.ingress.kubernetes.io/enable-cors: "true"
     nginx.ingress.kubernetes.io/cors-allow-origin: "*"
-    nginx.ingress.kubernetes.io/cors-allow-headers: "*"
+    nginx.ingress.kubernetes.io/cors-allow-headers: "x-datadog-trace-id, x-datadog-parent-id, x-datadog-origin, x-datadog-sampling-priority, traceparent, content-type"
 spec:
   rules:
     - host: api-rum-teste.k8s.lab4ever.xyz  # Substitua pelo seu domínio
