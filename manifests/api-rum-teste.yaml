@@ -96,16 +96,16 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: api-rum-teste-ingress
-  annotations:
+  #annotations:
    # nginx.ingress.kubernetes.io/rewrite-target: /
-    cert-manager.io/cluster-issuer: "cloudflare-cluster-issuer"
+   # cert-manager.io/cluster-issuer: "cloudflare-cluster-issuer"
    # nginx.ingress.kubernetes.io/enable-cors: "true"
    # nginx.ingress.kubernetes.io/cors-allow-origin: "*"
    # nginx.ingress.kubernetes.io/cors-allow-headers: "x-datadog-trace-id, x-datadog-parent-id, x-datadog-origin, x-datadog-sampling-priority, traceparent, content-type"
 spec:
   ingressClassName: traefik
   rules:
-    - host: api-rum-teste.k8s.lab4ever.xyz  # Substitua pelo seu domínio
+    - host: api-rum-teste.lab4ever.xyz  
       http:
         paths:
           - path: /
@@ -117,5 +117,6 @@ spec:
                   number: 80
   tls:
     - hosts:
-        - api-rum-teste.k8s.lab4ever.xyz
-      secretName: api-rum-teste-tls
+        - api-rum-teste.lab4ever.xyz
+        - "*.lab4ever.xyz"
+      secretName: cloudflare-origin-cert
