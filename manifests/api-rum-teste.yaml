@@ -64,7 +64,9 @@ spec:
             fieldRef:
               fieldPath: metadata.labels['tags.datadoghq.com/version']
         - name: DD_PROFILING_ENABLED
-          value: "false"
+          value: "true"
+        - name: DD_TRACE_PROPAGATION_STYLE
+          value: "tracecontext,datadog"
         - name: DD_LOGS_INJECTION
           value: "true"
         - name: DD_APPSEC_ENABLED
