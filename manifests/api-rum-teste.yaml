@@ -4,9 +4,9 @@ metadata:
   name: api-rum-teste
   labels:
     app: api-rum-teste
-    tags.datadoghq.com/env: dev
-    tags.datadoghq.com/service: api-rum-teste
-    tags.datadoghq.com/version: "1.2"
+    # tags.datadoghq.com/env: dev
+    # tags.datadoghq.com/service: api-rum-teste
+    # tags.datadoghq.com/version: "1.2"
 spec:
   replicas: 1
   selector:
@@ -16,25 +16,22 @@ spec:
     metadata:
       labels:
         app: api-rum-teste
-        tags.datadoghq.com/env: dev
-        tags.datadoghq.com/service: api-rum-teste
-        tags.datadoghq.com/version: "1.2"
-     #   admission.datadoghq.com/enabled: "true"
-     # annotations:
-     #   admission.datadoghq.com/java-lib.version: v1.39.0
+        # tags.datadoghq.com/env: dev
+        # tags.datadoghq.com/service: api-rum-teste
+        # tags.datadoghq.com/version: "1.2"
     spec:
-      volumes:
-        - hostPath:
-            path: /var/run/datadog/
-          name: apmsocketpath
+      # volumes:
+      #   - hostPath:
+      #       path: /var/run/datadog/
+      #     name: apmsocketpath
       containers:
       - name: api-rum-teste
         image: vinicpires/api-rum-teste:SHORT_SHA
         ports:
         - containerPort: 8080
-        volumeMounts:
-          - name: apmsocketpath
-            mountPath: /var/run/datadog
+        # volumeMounts:
+        #   - name: apmsocketpath
+        #     mountPath: /var/run/datadog
         env:
         - name: SPRING_DATASOURCE_PASSWORD
           valueFrom:
@@ -51,30 +48,36 @@ spec:
             secretKeyRef:
               name: spring-datasource-secret
               key: url
-        - name: DD_ENV
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.labels['tags.datadoghq.com/env']
-        - name: DD_SERVICE
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.labels['tags.datadoghq.com/service']
-        - name: DD_VERSION
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.labels['tags.datadoghq.com/version']
-        - name: DD_PROFILING_ENABLED
-          value: "true"
-        - name: DD_TRACE_PROPAGATION_STYLE
-          value: "tracecontext,datadog"
-        - name: DD_LOGS_INJECTION
-          value: "true"
-        - name: DD_APPSEC_ENABLED
-          value: "true"
-        - name: DD_IAST_ENABLED
-          value: "true"
-        - name: DD_APPSEC_SCA_ENABLED
-          value: "true"
+        - name: OTEL_SERVICE_NAME
+          value: api-rum-teste
+        - name: OTEL_EXPORTER_OTLP_ENDPOINT
+          value: "http://0.0.0.0:4317"
+        - name: OTEL_RESOURCE_ATTRIBUTES
+          value: "env=dev,region=br,version=1.2"
+        # - name: DD_ENV
+        #   valueFrom:
+        #     fieldRef:
+        #       fieldPath: metadata.labels['tags.datadoghq.com/env']
+        # - name: DD_SERVICE
+        #   valueFrom:
+        #     fieldRef:
+        #       fieldPath: metadata.labels['tags.datadoghq.com/service']
+        # - name: DD_VERSION
+        #   valueFrom:
+        #     fieldRef:
+        #       fieldPath: metadata.labels['tags.datadoghq.com/version']
+        # - name: DD_PROFILING_ENABLED
+        #   value: "true"
+        # - name: DD_TRACE_PROPAGATION_STYLE
+        #   value: "tracecontext,datadog"
+        # - name: DD_LOGS_INJECTION
+        #   value: "true"
+        # - name: DD_APPSEC_ENABLED
+        #   value: "true"
+        # - name: DD_IAST_ENABLED
+        #   value: "true"
+        # - name: DD_APPSEC_SCA_ENABLED
+        #   value: "true"
 
 --- 
 

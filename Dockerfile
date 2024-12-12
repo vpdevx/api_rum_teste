@@ -18,8 +18,10 @@ COPY --from=build /app/target/*.jar /app/application.jar
 
 RUN apk --no-cache add curl
 
-RUN curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
+# RUN curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
+
+RUN curl -Lo dd-java-agent.jar 'https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/latest/download/opentelemetry-javaagent.jar'
 
 EXPOSE 8080
 
-ENTRYPOINT ["java", "-javaagent:/app/dd-java-agent.jar", "-jar", "/app/application.jar"]
+ENTRYPOINT ["java", "-javaagent:/app/opentelemetry-javaagent.jar", "-jar", "/app/application.jar"]
