@@ -20,7 +20,7 @@ RUN apk --no-cache add curl
 
 # RUN curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
 
-RUN curl -Lo dd-java-agent.jar 'https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/latest/download/opentelemetry-javaagent.jar'
+RUN curl -Lo opentelemetry-javaagent.jar 'https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/latest/download/opentelemetry-javaagent.jar'
 
 EXPOSE 8080
 
